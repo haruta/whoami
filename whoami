@@ -1,0 +1,66 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'date'
+
+birth = 1978
+
+def puts_with_indent(text, indent = 2)
+  puts "#{(' ')*indent}#{text}"
+end
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: whoami [options]"
+
+  opts.on("-v", "--verbose", "run verbosely") do |v|
+    options[:verbose] = v
+  end
+
+  opts.on("-w", "--work", "work") do |v|
+    options[:works] = v
+  end
+
+  opts.on("-r", "--recent", "recent") do |v|
+    options[:recent] = v
+  end
+
+  opts.on("-l", "--love", "love") do |v|
+    options[:love] = v
+  end
+end.parse!
+
+puts 'Makoto Haruta'
+
+if options.key? :verbose
+  puts 'verbose:'
+  puts_with_indent "#{birth} birth (age: #{Date.today.year - birth})"
+  puts_with_indent 'Github https://github.com/haruta'
+  puts_with_indent 'Facebook https://www.facebook.com/haruta.makoto'
+  puts_with_indent 'Twitter https://twitter.com/haruta_makoto'
+end
+
+if options.key? :works
+  puts 'work:'
+  puts_with_indent 'fact-real, inc'
+  puts_with_indent 'http://www.fact-real.com/'
+  puts_with_indent 'Programmer'
+  puts_with_indent 'since 2003-04-01'
+end
+
+if options.key? :recent
+  puts 'recent:'
+  puts_with_indent 'Objective-C'
+  puts_with_indent 'Vue.js'
+  puts_with_indent 'AWS - EC2, RDS(PostgreSQL), S3'
+  puts_with_indent 'BigQuery x Fluentd'
+  puts_with_indent 'ElasticSearch'
+  puts_with_indent 'Rails'
+end
+
+if options.key? :love
+  puts 'love:'
+  puts_with_indent 'I love alcohole!!!!'
+  puts_with_indent 'I like game'
+  puts_with_indent 'Doragon Quest Heros!!!', 4
+end
